@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: var(--welcome-nav-height);
+
   >header {
     flex-grow: 1;
     flex-shrink: 0;
@@ -13,8 +14,9 @@
     padding-bottom: 30px;
     color: #1c2b33;
 
-    >img {
-      width: 54px;
+    >svg {
+      width: 64px;
+      height: 64px;
     }
   }
 
@@ -30,6 +32,7 @@
     flex-shrink: 0;
   }
 }
+
 .slide_fade_enter_active,
 .slide_fade_leave_active {
   position: absolute;
@@ -43,6 +46,7 @@
 .slide_fade_enter_from {
   transform: translateX(100vw);
 }
+
 .slide_fade_leave_to {
   transform: translateX(-100vw);
 }

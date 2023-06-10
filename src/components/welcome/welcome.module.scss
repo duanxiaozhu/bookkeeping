@@ -10,8 +10,8 @@
   align-items: center;
   text-align: center;
 
-  >img {
-    width: 120px;
+  >svg{
+    height: 150px;
   }
 
   >div {
@@ -50,6 +50,14 @@
   padding: 0 16px;
   color: var(--welcome-text);
   padding-bottom: var(--welcome-nav-gap);
+  >a{
+    display: flex;
+    align-items: center;
+    >svg{
+      width: 30px;
+      height: 30px;
+    }
+  }
 
   >.fake {
     visibility: hidden;
