@@ -29,7 +29,7 @@ export const Welcome = defineComponent({
         return () => (
             <div class={s.wrapper}>
                 <header>
-                    <h1>花儿记账</h1>
+                    <h1>小段记账</h1>
                     <svg>
                         <use xlinkHref='#flower'></use>
                     </svg>
