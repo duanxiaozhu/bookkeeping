@@ -7,6 +7,7 @@ import { Icon } from '../shared/Icon';
 import { Center } from '../shared/Center';
 import { Navbar } from '../shared/Navbar';
 import { Overlay } from '../shared/Overlay';
+import { MainLayout } from '../layouts/MainLayout';
 
 export const StartPage = defineComponent({
     setup: (props, context) => {
@@ -16,10 +17,11 @@ export const StartPage = defineComponent({
             console.log(refOverlayVisible.value)
         }
         return () => (
-            <div>
-                <Navbar class={s.menuIcon}>
-                    {{ default: () => '小段记账', icon: () => <Icon name='menu' class={s.navIcon} onClick={onClickMenu} /> }}
-                </Navbar>
+            <MainLayout>{
+                {
+                title: () => '小段记账',
+                icon: () => <Icon name='menu' class={s.navIcon} onClick={onClickMenu} /> ,
+                default:()=><>
                 <Center class={s.noData_wrapper}>
                     <Icon name="noData" class={s.noData} />
                     <span>暂无数据</span>
@@ -35,7 +37,9 @@ export const StartPage = defineComponent({
                 {refOverlayVisible.value &&
                     <Overlay onClose={() => refOverlayVisible.value = false} />
                 }
-            </div>
+                </>
+                }
+            }</MainLayout>
         )
     }
 })
