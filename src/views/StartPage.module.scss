@@ -1,7 +1,8 @@
 .button {
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-        &_wrapper {
+
+    &_wrapper {
         padding: 16px 16px;
     }
 }
@@ -9,16 +10,19 @@
 .noData_wrapper {
     padding: 80px 0;
     flex-direction: column;
+
     .noData {
         width: 128px;
         height: 128px;
     }
-    >span{
+
+    >span {
         font-size: 18px;
         color: #969593;
     }
 }
-.navIcon{
+
+.navIcon {
     position: relative;
     top: 1px;
-  }
+}

@@ -1,0 +1,58 @@
+.wrapper {
+}
+.dateAndAmount{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    padding: 16px;
+    margin: 0 8px;
+    height: 100px;
+    font-weight: 700;
+    font-family: monospace;
+    border-radius: 8px;
+    background: var(--dateAndAmount-bg);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+
+    >.date{
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      color: var(--date-text);
+      .icon{
+        position: relative;
+        bottom: 2px;
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      }
+    }
+    >.amount{
+      font-size: 28px;
+      color: var(--amount-text);
+    }
+  }
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--button-border-color);
+  > button {
+    border: none;
+    border-right: 1px solid var(--button-border-color);
+    border-bottom: 1px solid var(--button-border-color);
+    width: 25%;
+    height: 48px;
+    background: transparent;
+    &:nth-child(4n){
+      border-right: none;
+    }
+    &:nth-child(13),
+    &:nth-child(14),
+    &:nth-child(15),
+    &:nth-child(16){
+      border-bottom: none;
+    }
+  }
+}
