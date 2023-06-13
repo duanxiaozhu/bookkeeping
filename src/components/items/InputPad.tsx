@@ -109,7 +109,8 @@ export const InputPad = defineComponent({
       {
         icon: <Icon name="delete" class={s.delete} />,
         onClick: () => {
-          refAmount.value = refAmount.value.substring(0, refAmount.value.length - 1);
+          refAmount.value.length===1?refAmount.value='0'
+          :refAmount.value = refAmount.value.substring(0, refAmount.value.length - 1);
         },
       },
       {
@@ -129,7 +130,8 @@ export const InputPad = defineComponent({
     const minDate= new Date(2020, 0, 1)
     const maxDate= new Date(2030, 0, 1)
     const refDatePickerVisible = ref(false)
-    const showDatePicker = () => refDatePickerVisible.value = true
+    let refDate2=now
+    const showDatePicker = () => {refDatePickerVisible.value = true,refDate2=now}
     const hideDatePicker = () => refDatePickerVisible.value = false
     const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
     const refAmount = ref('0')
@@ -140,7 +142,7 @@ export const InputPad = defineComponent({
           <span>
           <span onClick={showDatePicker}>{time(refDate.value).format()}</span>
             <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
-              <DatetimePicker value={refDate.value} type="date" title="选择年月日"
+              <DatetimePicker value={refDate.value} v-model={refDate2} type="date" title="选择年月日"
                 min-date={minDate}
                 max-date={maxDate}
                 onConfirm={setDate} onCancel={hideDatePicker}
