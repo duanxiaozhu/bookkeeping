@@ -34,10 +34,11 @@
     --button-active-ok:#79a4f9; 
     --input-min-height: 48px;
     --input-border-color: white;
-    --input-radius: var(--button-radius);
+    --input-radius: var(--inputPad-radius);
     --input-shadow: rgba(0,0,0,0.25);
     --error-color: #E10505;
     --emoji-nav-text: #999;
     --emoji-nav-text-selected: #333;
     --emojiList-bg:white;
+    --selectedEmoji-bg:#69b2f6;
 }
