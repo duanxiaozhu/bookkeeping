@@ -13,25 +13,23 @@ export const ItemCreate = defineComponent({
     setup: (props, context) => {
         const refKind = ref('支出')
         return () => (
-            <MainLayout class={s.wrapper}>{
-                {
-                    title: () => '记一笔',
-                    icon: () => <Icon name='left' class={s.navIcon} />,
-                    default:()=><>
-         <Tabs v-model:selected={refKind.value}>
+            <MainLayout class={s.wrapper}>{{
+                title: () => '记一笔',
+                icon: () => <Icon name='left' class={s.navIcon} />,
+                default:()=><>
+        <Tabs v-model:selected={refKind.value}>
             <Tab name="支出">
-              icon 列表
+                icon 列表
             </Tab>
             <Tab name="收入">
-              icon 列表2
+            icon 列表2
             </Tab>
-          </Tabs>
-          <div class={s.inputPad_wrapper}>
-          <InputPad/>
-          </div>
-                    </>
-                }
-            }</MainLayout>
+        </Tabs>
+        <div class={s.inputPad_wrapper}>
+        <InputPad/>
+        </div>
+        </>
+            }}</MainLayout>
         )
     }
 })
