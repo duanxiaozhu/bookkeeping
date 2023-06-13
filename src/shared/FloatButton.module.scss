@@ -12,6 +12,7 @@
     bottom: 16px;
     right: 16px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s cubic-bezier(0.68, 0.01, 0.62, 0.6), background-color 0.08s linear;
 
     >.icon {
         width: 24px;
@@ -20,3 +21,7 @@
 
     }
 }
+.floatButton:active {
+    transform: scale(0.95);
+    opacity:0.5 ;
+  }

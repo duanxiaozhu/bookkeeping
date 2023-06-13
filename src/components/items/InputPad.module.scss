@@ -1,5 +1,4 @@
-.wrapper {
-}
+
 .dateAndAmount{
     display: flex;
     flex-direction: column;
@@ -9,7 +8,7 @@
     margin: 0 8px;
     height: 100px;
     font-weight: 700;
-    font-family: monospace;
+    font-family: Consolas, monospace;
     border-radius: 8px;
     background: var(--dateAndAmount-bg);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -23,7 +22,7 @@
       color: var(--date-text);
       .icon{
         position: relative;
-        bottom: 2px;
+        bottom: 1px;
         width: 24px;
         height: 24px;
         margin-right: 8px;
@@ -34,25 +33,113 @@
       color: var(--amount-text);
     }
   }
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  border-top: 1px solid var(--button-border-color);
-  > button {
-    border: none;
-    border-right: 1px solid var(--button-border-color);
-    border-bottom: 1px solid var(--button-border-color);
-    width: 25%;
-    height: 48px;
-    background: transparent;
-    &:nth-child(4n){
-      border-right: none;
+  .buttons {
+    display: grid;
+    grid-template-areas:
+      "n1 n2 n3 d"
+      "n4 n5 n6 c"
+      "n7 n8 n9 s"
+      "n0 n0 nd s";
+    grid-auto-rows: 64px;
+    grid-auto-columns: 1fr;
+    flex-wrap: wrap;
+    margin: 6px;
+  
+    > button {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 4px;
+      border: 1px solid white;
+      border-radius: var(--inputPad-radius);
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      color: var(--inputPad-text);
+      transition: transform 0.2s cubic-bezier(0.68, 0.01, 0.62, 0.6), background-color 0.08s linear;
+  
+      &:nth-child(1) {
+        grid-area: n1;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(2) {
+        grid-area: n2;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(3) {
+        grid-area: n3;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(4) {
+        grid-area: n4;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(5) {
+        grid-area: n5;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(6) {
+        grid-area: n6;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(7) {
+        grid-area: n7;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(8) {
+        grid-area: n8;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(9) {
+        grid-area: n9;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(10) {
+        grid-area: n0;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(11) {
+        grid-area: nd;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(12) {
+        grid-area: d;
+        background-color: var(--inputPad-button-bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &:nth-child(13) {
+        grid-area: c;
+        background-color: var(--inputPad-button-bg);
+      }
+      &:nth-child(14) {
+        grid-area: s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--inputPad-button-bg-ok);
+        border: 1px solid var(--inputPad-button-bg-ok);
+        box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+      }
     }
-    &:nth-child(13),
-    &:nth-child(14),
-    &:nth-child(15),
-    &:nth-child(16){
-      border-bottom: none;
+  
+    > button:not(:nth-child(14)):active {
+      transform: scale(0.9);
+      background-color: var(--button-active);
     }
+    > button:nth-child(14):active {
+      transform: scale(0.9);
+      background-color: var(--button-active-ok);
+    }
+  
+    .delete {
+      width: 32px;
+      height: 32px;
+    }
+  
+    .ok {
+      width: 50px;
+      height: 50px;
+      fill:white
+    }
+  
+
   }
-}

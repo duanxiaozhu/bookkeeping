@@ -15,14 +15,21 @@
     --float-button-text: white;
     --float-button-bg:var(--button-bg);
     --navbar-bg: var(--welcome-bg);
-    --navbar-text:#1c2b33;
-    --overlay-user-text: #1c2b33;
+    --navbar-text:var(--welcome-text);
+    --overlay-user-text:var(--welcome-text);
     --overlay-bg: #f9fafb;
     --top-safe-area-height: 66px;
     --tabs-indicator-bg:var(--button-bg);
     --tabs-selected-text:var(--button-bg);
     --button-border-color: #ddd;
-    --amount-text: #53A867;
-    --date-text: #1c2b33;
+    --amount-text: #0081fa;
+    --date-text: var(--welcome-text);
     --dateAndAmount-bg:white;
+    --inputPad-button-bg:white;
+    --inputPad-border:#edeff3;
+    --inputPad-radius:10px;
+    --inputPad-text:var(--welcome-text);
+    --button-active:#f6f7f9;
+    --inputPad-button-bg-ok:var(--amount-text);
+    --button-active-ok:#79a4f9;
 }

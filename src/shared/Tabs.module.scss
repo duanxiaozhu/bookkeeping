@@ -29,12 +29,10 @@
         .indicator {
             position: absolute;
             left: 0;
-            bottom: -1;
             display: block;
             height: 2px;
             border-radius: 10px 10px 0 0;
             background: var(--tabs-indicator-bg);
-            z-index: 2;
             transition: all 250ms;
 
         }
