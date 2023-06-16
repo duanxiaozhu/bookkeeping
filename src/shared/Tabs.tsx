@@ -38,8 +38,8 @@ export const Tabs = defineComponent({
           throw new Error('<Tabs> only accepts <Tab> as children')
         }
       }
-      return <div class={s.tabs_wrapper}>
-      <div class={s.tabs}>
+
+      return <div class={s.tabs}>
         <ol class={s.tabs_nav} ref={container}>
           {tabs.map(item =>
             <li 
@@ -49,13 +49,13 @@ export const Tabs = defineComponent({
             >
               {item.props?.name}
             </li>)}
+            <div class={s.indicator} ref={indicator}></div>
         </ol>
-        <div class={s.indicator} ref={indicator}></div>
         <div>
         {tabs.find(item => item.props?.name === props.selected)}
         </div>
       </div>
-    </div>
+
     }
   }
 })

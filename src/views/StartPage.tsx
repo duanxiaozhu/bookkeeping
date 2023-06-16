@@ -21,7 +21,7 @@ export const StartPage = defineComponent({
                 title: () => '小段记账',
                 icon: () => <Icon name='menu' class={s.navIcon} onClick={onClickMenu} /> ,
                 default:()=><>
-                <Center class={s.noData_wrapper}>
+                <Center class={s.noData_wrapper} direction='|'>
                     <Icon name="noData" class={s.noData} />
                     <span>暂无数据</span>
                 </Center>

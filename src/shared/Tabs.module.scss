@@ -1,40 +1,36 @@
-.tabs_wrapper {
+.tabs {
     position: relative;
 
-    .tabs {
-        position: relative;
+    &_nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        color: var(--navbar-text);
+        position: sticky;
+        z-index: 1;
+        top: 0px;
 
-        &_nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            color: var(--navbar-text);
-            position: relative;
+        >li {
+            flex-grow: 1;
+            flex-shrink: 0;
+            padding: 8px 0;
+            background: var(--navbar-bg);
 
-            >li {
-                flex-grow: 1;
-                flex-shrink: 0;
-                padding: 8px 0;
-                background: var(--navbar-bg);
-
-                &.selected {
-                    position: relative;
-                    color: var(--tabs-selected-text);
-                    font-weight: 700;
-                }
+            &.selected {
+                color: var(--tabs-selected-text);
+                font-weight: 700;
             }
         }
-
         .indicator {
             position: absolute;
-            left: 0;
             display: block;
+            bottom: 0;
             height: 2px;
             border-radius: 10px 10px 0 0;
             background: var(--tabs-indicator-bg);
             transition: all 250ms;
-
+    
         }
     }
 }
