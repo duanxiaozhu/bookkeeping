@@ -45,7 +45,7 @@ export const EmojiSelect = defineComponent({
             )
           })
         return () => (
-            <div class={[s.emojiList, s.error]}>
+            <div class={s.emojiList}>
                 <nav>
                 {table.map((item, index) =>
             <span class={index === refSelected.value ? s.selected : ''}

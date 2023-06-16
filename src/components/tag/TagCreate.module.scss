@@ -11,6 +11,9 @@
     margin-top: 8px;
   }
   .formLabel {
+    .error{
+      border-color: var(--error-color);
+    }
   }
   .formItem {
     min-height: var(--input-min-height);
