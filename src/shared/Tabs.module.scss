@@ -10,12 +10,12 @@
         position: sticky;
         z-index: 1;
         top: 0px;
+        background: var(--navbar-bg);
 
         >li {
             flex-grow: 1;
             flex-shrink: 0;
             padding: 8px 0;
-            background: var(--navbar-bg);
 
             &.selected {
                 color: var(--tabs-selected-text);
