@@ -88,7 +88,7 @@ export const ItemCreate = defineComponent({
             </Tab>
             <Tab name="收入" class={s.tags_wrapper}>
             <div class={s.tag}>
-                  <div class={s.sign}>
+                  <div class={[s.sign,s.createButton]}>
                     <Icon name="add" class={s.createTag} />
                   </div>
                   <div class={s.name}>

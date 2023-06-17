@@ -6,6 +6,14 @@
     font-size: var(--button-font-size);
     border-radius: var(--button-radius);
     height: var(--button-height);
+    &.normal {
+    }
+    &.important {
+    }
+    &.danger {
+      background: var(--button-bg-danger);
+      border-color: var(--button-bg-danger);
+    }
     transition: transform 0.2s cubic-bezier(0.68, 0.01, 0.62, 0.6), background-color 0.08s linear;
 
 }

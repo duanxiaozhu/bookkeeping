@@ -17,7 +17,7 @@ export const Overlay = defineComponent({
       <div class={s.mask} onClick={close}></div>
       <div class={s.overlay}>
         <section class={s.currentUser} onClick={onClickSignIn}>
-          <h2>未登录用户</h2>
+          <h3>未登录用户</h3>
           <p>点击这里登录</p>
         </section>
         <nav>

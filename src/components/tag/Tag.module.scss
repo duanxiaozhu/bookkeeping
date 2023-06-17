@@ -41,6 +41,8 @@
     }
 
     &_name {
+      display: block;
+      height: 22px;
     }
     &_value {
       display: flex;
@@ -52,6 +54,16 @@
       font-size: 12px;
     }
   }
+  .actions{
+    padding: 0 16px 16px 16px;
+    display: flex;
+    justify-content: space-between;
+    .removeTags, .removeTagsAndItems{
+      width: calc(50% - 8px);
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+  }
+
   @keyframes shake-horizontal {
     0%,
     100% {
