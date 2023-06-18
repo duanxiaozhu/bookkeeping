@@ -9,11 +9,8 @@ export const Tabs = defineComponent({
       type: String as PropType<string>,
       required: false,
     },
-    onUpdateSelected: {
-      type: Function as PropType<(name: string) => void>,
-      required: false,
-    }
   },
+  emits:['update:selected'],
   setup: (props, context) => {
         // 设置导航条
         const container = ref<HTMLDivElement>();
