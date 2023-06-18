@@ -55,7 +55,7 @@ export const Tabs = defineComponent({
             </li>)}
             <div class={s.indicator} ref={indicator}></div>
         </ol>
-        <div>
+        <div class={s.tabsList}>
         {tabs.find(item => item.props?.name === props.selected)}
         </div>
       </div>

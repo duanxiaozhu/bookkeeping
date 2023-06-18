@@ -1,5 +1,7 @@
 .tabs {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 56px);
 
     &_nav {
         display: flex;
@@ -7,15 +9,16 @@
         align-items: center;
         text-align: center;
         color: var(--navbar-text);
-        position: sticky;
+        position: relative;
         z-index: 1;
-        top: 0px;
+        top: 0;
         background: var(--navbar-bg);
-
+        flex-grow: 0;
+        flex-shrink: 0;
         >li {
             flex-grow: 1;
             flex-shrink: 0;
-            padding: 8px 0;
+            padding: 16px 0 10px 0;
 
             &.selected {
                 color: var(--tabs-selected-text);
@@ -32,5 +35,10 @@
             transition: all 250ms;
     
         }
+    }
+    .tabsList{
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow: auto;
     }
 }
