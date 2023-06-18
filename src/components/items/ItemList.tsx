@@ -1,4 +1,5 @@
-import { defineComponent, reactive, ref } from 'vue';
+import { Overlay } from 'vant';
+import { defineComponent,  reactive, ref, watchEffect } from 'vue';
 import { MainLayout } from '../../layouts/MainLayout';
 import { Icon } from '../../shared/Icon';
 import { Tab, Tabs } from '../../shared/Tabs';
@@ -28,6 +29,12 @@ export const ItemList = defineComponent({
         end: time.lastDayOfYear()
       }
     ]
+    watchEffect(() => {
+      if (refSelected.value === '自定义时间') {
+        refOverlayVisible.value = true
+      }
+    })
+    const refOverlayVisible = ref(false)
     return () => (
       <MainLayout>{
         {
@@ -56,6 +63,23 @@ export const ItemList = defineComponent({
                   endDate={customTime.end.format()} />
               </Tab>
             </Tabs>
+            <Overlay show={refOverlayVisible.value} class={s.overlay} >
+              <div class={s.overlay_inner}>
+                <header>
+                  请选择时间
+                </header>
+                <main>
+                  <form>
+                    <div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                  </form>
+                </main>
+              </div>
+            </Overlay>
             </div>
           )
         }

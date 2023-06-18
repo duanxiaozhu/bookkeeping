@@ -9,3 +9,22 @@
     overflow: auto;
 
   }
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+
+    &_inner {
+      background: var(--bg);
+      width: 80vw;
+      > header {
+        background: var(--button-bg);
+        padding: 12px 16px;
+        color: var(--dialog-header-text);
+      }
+      > main{
+  
+      }
+    }
+  }
