@@ -30,6 +30,28 @@
         animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
       }
     }
+    &.select{
+      border: 1px solid var(--select-bg);
+      border-radius: var(--input-radius);
+      width: 100%;
+      text-align: center;
+      min-height: 38px;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      background: var(--select-bg);
+      outline: none;
+      option {
+        background: var(--welcome-bg);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;}
+
+    }
+    &.green{
+      background:var(--total-expenses);
+      border: 1px solid var(--total-expenses);
+    }
     &.validationCodeInput {
       flex-grow: 0;
       width: 10em;

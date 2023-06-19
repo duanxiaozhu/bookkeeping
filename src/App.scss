@@ -18,3 +18,20 @@ body{
     padding-right: 16px;
   }
 }
+.van-field__label{
+  font-size: 16px;
+  color: white;
+  width: 50px;
+  font-weight: 700;
+}
+.van-field__control {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+.van-cell__right-icon{
+  width: 50px;
+  color: white;
+  text-align: right;
+}
