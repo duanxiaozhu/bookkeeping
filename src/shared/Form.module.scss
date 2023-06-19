@@ -19,7 +19,7 @@
       flex-grow: 1;
       border: 1px solid var(--input-border-color);
       border-radius: var(--input-radius);
-      font-size: 18px;
+      font-size: 15px;
       font-family: inherit;
       padding-left: 16px;
       padding-right: 16px;
@@ -29,6 +29,17 @@
         -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
         animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
       }
+    }
+    &.validationCodeInput {
+      flex-grow: 0;
+      width: 10em;
+      &.error{
+        -webkit-animation:none;
+      }
+    }
+    &.validationCodeButton {
+      margin-left: 26px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
 
     &_name {

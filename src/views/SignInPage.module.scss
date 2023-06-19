@@ -1,0 +1,23 @@
+.wrapper{
+
+}
+.logo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 42px 0 0;
+  .icon{
+    width: 64px;
+    height: 68px;
+  }
+  .appName{
+    color: var(--welcome-text);    
+
+    font-size: 32px;
+  }
+}
+.button{
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
