@@ -8,6 +8,7 @@
   width: 100%;
   height: calc(100% - var(--top-safe-area-height));
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .overlay {
