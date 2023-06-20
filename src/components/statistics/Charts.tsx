@@ -1,7 +1,11 @@
-import { defineComponent, PropType, ref } from 'vue';
+import {defineComponent,  PropType,  ref } from 'vue';
 import s from './Charts.module.scss';
 import { FormItem } from '../../shared/Form';
 import {Popup,Field,Picker}from 'vant'
+import { LineChart } from './LineChart';
+import { PieChart } from './PieChart';
+import { Bars } from './Bars';
+
 export const Charts = defineComponent({
   props: {
     startDate: {
@@ -22,6 +26,7 @@ export const Charts = defineComponent({
       showPicker.value = false;
     };
     const category=ref('expenses')
+ 
     return () => (
       <div class={s.wrapper}>
         {/* <FormItem label='类型' type='select' options={[
@@ -30,7 +35,7 @@ export const Charts = defineComponent({
         ]}
         v-model={category.value}
         /> */}
-        <div>
+          <div class={s.select}>
           <Field
             class={[s.input,result.value==='收入'?s.green:'']}
             v-model={result.value}
@@ -45,7 +50,10 @@ export const Charts = defineComponent({
                 onCancel={()=>showPicker.value = false}
                 onConfirm={onConfirm}/>
           </Popup>
-        </div>
+          </div>
+          <LineChart />
+          <PieChart />
+          <Bars />
       </div>
     )
   }
