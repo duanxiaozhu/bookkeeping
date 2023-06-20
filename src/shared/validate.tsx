@@ -26,7 +26,7 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
                 }
                 break;
             case 'pattern':
-                if (isEmpty(value)&& !rule.regex.test(value!.toString())) {
+                if (!isEmpty(value)&& !rule.regex.test(value!.toString())) {
                     errors[key] = errors[key] ?? []
                     errors[key]?.push(message)
                 }
@@ -39,4 +39,14 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
 }
 function isEmpty(value: null | undefined | string | number | FData) {
     return value === null || value === undefined || value === ''
+  }
+  export function hasError(errors: Record<string, string[]>) {
+    let result = false
+    for (let key in errors) {
+      if (errors[key].length > 0) {
+        result = true
+        break
+      }
+    }
+    return result
   }
