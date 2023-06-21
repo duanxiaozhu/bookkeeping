@@ -1,17 +1,15 @@
 import s from './welcome.module.scss';
 import { RouterLink } from 'vue-router';
 import { FunctionalComponent } from 'vue';
+import { SkipFeatures } from '../../shared/SkipFeatures';
 export const FirstActions: FunctionalComponent = () => {
     return <div class={s.actions}>
-        <RouterLink class={s.fake} to="/start" ><svg>
-            <use xlinkHref='#skip'></use>
-        </svg></RouterLink>
+        <SkipFeatures class={s.fake} />
         <RouterLink to="/welcome/2" >    <svg>
             <use xlinkHref='#next'></use>
-        </svg></RouterLink>
-        <RouterLink to="/start" ><svg>
-            <use xlinkHref='#skip'></use>
-        </svg></RouterLink>
+        </svg>
+        </RouterLink>
+        <SkipFeatures />
     </div>
 }
 

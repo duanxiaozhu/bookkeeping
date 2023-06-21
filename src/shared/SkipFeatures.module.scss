@@ -1,0 +1,15 @@
+.skip{
+    height: 64px;
+    width: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    >a{
+        >svg{
+            position: relative;
+            top: 3px;
+            height: 31px;
+            width: 31px;
+        }
+    }
+}
