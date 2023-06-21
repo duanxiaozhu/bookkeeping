@@ -53,7 +53,9 @@ export const Tabs = defineComponent({
             <div class={s.indicator} ref={indicator}></div>
         </ol>
         <div class={s.tabsList}>
-        {tabs.find(item => item.props?.name === props.selected)}
+        {tabs.map(item =>
+            <div v-show={item.props?.name === props.selected}>{item}</div>
+          )}
         </div>
       </div>
 
