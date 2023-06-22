@@ -45,8 +45,8 @@
     }
     &.selected {
       .sign {
-        // background:  var(--selectedTag-bg);
-        // border: 1px var(--selectedTag-bg);
+        background:  var(--selectedTag-bg);
+        border: 1px var(--selectedTag-bg);
       }
     }
   }

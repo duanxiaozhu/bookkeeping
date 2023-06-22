@@ -4,8 +4,6 @@ import { MainLayout } from '../../layouts/MainLayout';
 import { Icon } from '../../shared/Icon';
 import { Tab, Tabs } from '../../shared/Tabs';
 import { InputPad } from './InputPad';
-import { http } from '../../shared/Http';
-import { useTags } from '../../shared/useTags';
 import { Tags } from './Tags';
 export const ItemCreate = defineComponent({
     props: {
@@ -15,6 +13,9 @@ export const ItemCreate = defineComponent({
     },
     setup: (props, context) => {
         const refKind = ref('支出')
+        const refTagId=ref<number>()
+        const refHappenAt=ref<string>(new Date().toISOString())
+        const refAmount=ref<number>(0)
         return () => (
             <MainLayout class={s.layout}>{{
                 title: () => '记一笔',
@@ -22,18 +23,18 @@ export const ItemCreate = defineComponent({
                 default:()=><>
                 <div class={s.wrapper}>
         <Tabs v-model:selected={refKind.value} 
-        selected={refKind.value}
-        onUpdate:selected={()=>{console.log(1)}}
         class={s.tabs}>
             <Tab name="支出" class={s.tags_wrapper}>
-            <Tags kind="expenses"/>
+            <Tags kind="expenses" v-model:selected={refTagId.value}/>
             </Tab>
             <Tab name="收入" class={s.tags_wrapper}>
-            <Tags kind="income"/>
+            <Tags kind="income" v-model:selected={refTagId.value}/>
             </Tab>
         </Tabs>
         <div class={s.inputPad_wrapper}>
-        <InputPad/>
+            <div>{refAmount.value}</div>
+        <InputPad v-model:happenAt={refHappenAt.value}
+        v-model:amount={refAmount.value}/>
         </div>
         </div>
         </>
