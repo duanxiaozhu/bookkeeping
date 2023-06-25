@@ -1,56 +1,58 @@
-import { defineComponent, onUpdated, PropType } from 'vue';
-import { http } from '../../shared/Http';
-import { Icon } from '../../shared/Icon';
-import { useTags } from '../../shared/useTags';
-import s from './Tags.module.scss';
+import { defineComponent, onUpdated, PropType } from "vue";
+import { http } from "../../shared/Http";
+import { Icon } from "../../shared/Icon";
+import { useTags } from "../../shared/useTags";
+import s from "./Tags.module.scss";
+import { RouterLink } from "vue-router";
 export const Tags = defineComponent({
   props: {
     kind: {
       type: String as PropType<string>,
-      required: true
+      required: true,
     },
-    selected:Number
+    selected: Number,
   },
-  emits:['update:selected'],
+  emits: ["update:selected"],
   setup: (props, context) => {
     const { tags, hasMore, page, fetchTags } = useTags((page) => {
-      return http.get<Resources<Tag>>('/tags', {
+      return http.get<Resources<Tag>>("/tags", {
         kind: props.kind,
         page: page + 1,
-        _mock: 'tagIndex'
-      })
-    })
-    const onSelect=(tag:Tag)=>{
-      context.emit('update:selected',tag.id)
-    }
-    return () => <>
-      <div class={s.tags_wrapper}>
-        <div class={s.tag}>
-          <div class={[s.sign,,s.createButton]}>
-            <Icon name="add" class={s.createTag} />
-          </div>
-          <div class={s.name}>
-            新增
-          </div>
+        _mock: "tagIndex",
+      });
+    });
+    const onSelect = (tag: Tag) => {
+      context.emit("update:selected", tag.id);
+    };
+    return () => (
+      <>
+        <div class={s.tags_wrapper}>
+          <RouterLink to={`/tags/create?kind=${props.kind}`} class={s.tag}>
+            <div class={[s.sign, , s.createButton]}>
+              <Icon name="add" class={s.createTag} />
+            </div>
+            <div class={s.name}>新增</div>
+          </RouterLink>
+          {tags.value.map((tag) => (
+            <div
+              class={[s.tag, props.selected === tag.id ? s.selected : ""]}
+              onClick={() => onSelect(tag)}
+            >
+              <div class={s.sign}>{tag.sign}</div>
+              <div class={s.name}>{tag.name}</div>
+            </div>
+          ))}
         </div>
-        {tags.value.map(tag =>
-          <div class={[s.tag, props.selected===tag.id?s.selected:'']}
-          onClick={()=>onSelect(tag)}>
-            <div class={s.sign}>
-              {tag.sign}
-            </div>
-            <div class={s.name}>
-              {tag.name}
-            </div>
-          </div>
-        )}
-      </div>
-      <div class={s.more}>
-        {hasMore.value ?
-          <span class={s.loadMore} onClick={fetchTags}>点击加载更多</span> :
-          <span class={s.noMore}>没有更多</span>
-        }
-      </div>
-    </>
-  }
-})
+        <div class={s.more}>
+          {hasMore.value ? (
+            <span class={s.loadMore} onClick={fetchTags}>
+              点击加载更多
+            </span>
+          ) : (
+            <span class={s.noMore}>没有更多</span>
+          )}
+        </div>
+      </>
+    );
+  },
+});
