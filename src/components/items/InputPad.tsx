@@ -1,40 +1,46 @@
-import { defineComponent, PropType, ref } from 'vue';
-import { DatetimePicker, Popup } from 'vant';
-import { Time } from '../../shared/time';
-import { Icon } from '../../shared/Icon';
-import s from './InputPad.module.scss';
+import { defineComponent, PropType, ref } from "vue";
+import { DatetimePicker, Popup } from "vant";
+import { Time } from "../../shared/time";
+import { Icon } from "../../shared/Icon";
+import s from "./InputPad.module.scss";
 export const InputPad = defineComponent({
   props: {
-    happenAt:String,
-    amount:Number
+    happenAt: String,
+    amount: Number,
+    onSubmit: {
+      type: Function as PropType<() => void>,
+    },
   },
   setup: (props, context) => {
     const appendText = (n: number | string) => {
-      const nString=n.toString()
-      const dotIndex=refAmount.value.indexOf('.')
-      if(refAmount.value.length>13){
-        return
+      const nString = n.toString();
+      const dotIndex = refAmount.value.indexOf(".");
+      if (refAmount.value.length > 13) {
+        return;
       }
-      if(dotIndex>=0&&refAmount.value.length-dotIndex>2){
-        return
+      if (dotIndex >= 0 && refAmount.value.length - dotIndex > 2) {
+        return;
       }
-      if(nString==='.'){
-        if(dotIndex>=0){// 已经有小数点了
-          return
+      if (nString === ".") {
+        if (dotIndex >= 0) {
+          // 已经有小数点了
+          return;
         }
-      } else if (nString === '0') {
-        if (dotIndex === -1) { // 没有小数点
-          if (refAmount.value === '0') { // 没小数点，但是有0
-            return
+      } else if (nString === "0") {
+        if (dotIndex === -1) {
+          // 没有小数点
+          if (refAmount.value === "0") {
+            // 没小数点，但是有0
+            return;
           }
         }
       } else {
-        if (refAmount.value === '0') {
-          refAmount.value = ''
+        if (refAmount.value === "0") {
+          refAmount.value = "";
         }
       }
-      refAmount.value += n.toString()
-    }
+      refAmount.value += n.toString();
+    };
     const buttons = [
       {
         text: "1",
@@ -106,8 +112,12 @@ export const InputPad = defineComponent({
       {
         icon: <Icon name="delete" class={s.delete} />,
         onClick: () => {
-          refAmount.value.length===1?refAmount.value='0'
-          :refAmount.value = refAmount.value.substring(0, refAmount.value.length - 1);
+          refAmount.value.length === 1
+            ? (refAmount.value = "0")
+            : (refAmount.value = refAmount.value.substring(
+                0,
+                refAmount.value.length - 1
+              ));
         },
       },
       {
@@ -123,37 +133,56 @@ export const InputPad = defineComponent({
           props.onSubmit?.();
         },
       },
-    ]
-    const minDate= new Date(2020, 0, 1)
-    const maxDate= new Date(2030, 0, 1)
-    const refDatePickerVisible = ref(false)
-    let refDate2=new Date()
-    const showDatePicker = () => {refDatePickerVisible.value = true,refDate2=new Date()}
-    const hideDatePicker = () => refDatePickerVisible.value = false
-    const setDate = (date: Date) => { context.emit('update:happenAt',date.toISOString()); hideDatePicker() }
-    const refAmount = ref(props.amount ? (props.amount / 100).toString() : '0')
-    return () => <>
-      <div class={s.dateAndAmount}>
-        <span class={s.date}>
-          <Icon name="date" class={s.icon}/>
-          <span>
-          <span onClick={showDatePicker}>{new Time(props.happenAt).format()}</span>
-            <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
-              <DatetimePicker value={props.happenAt} v-model={refDate2} type="date" title="选择年月日"
-                min-date={minDate}
-                max-date={maxDate}
-                onConfirm={setDate} onCancel={hideDatePicker}
-              />
-            </Popup>
+    ];
+    const minDate = new Date(2020, 0, 1);
+    const maxDate = new Date(2030, 0, 1);
+    const refDatePickerVisible = ref(false);
+    let refDate2 = new Date();
+    const showDatePicker = () => {
+      (refDatePickerVisible.value = true), (refDate2 = new Date());
+    };
+    const hideDatePicker = () => (refDatePickerVisible.value = false);
+    const setDate = (date: Date) => {
+      context.emit("update:happenAt", date.toISOString());
+      hideDatePicker();
+    };
+    const refAmount = ref(props.amount ? (props.amount / 100).toString() : "0");
+    return () => (
+      <>
+        <div class={s.dateAndAmount}>
+          <span class={s.date}>
+            <Icon name="date" class={s.icon} />
+            <span>
+              <span onClick={showDatePicker}>
+                {new Time(props.happenAt).format()}
+              </span>
+              <Popup
+                position="bottom"
+                v-model:show={refDatePickerVisible.value}
+              >
+                <DatetimePicker
+                  value={props.happenAt}
+                  v-model={refDate2}
+                  type="date"
+                  title="选择年月日"
+                  min-date={minDate}
+                  max-date={maxDate}
+                  onConfirm={setDate}
+                  onCancel={hideDatePicker}
+                />
+              </Popup>
+            </span>
           </span>
-        </span>
-        <span class={s.amount}>￥{refAmount.value}</span>
-      </div>
-      <div class={s.buttons}>
-        {buttons.map(button =>
-          <button onClick={button.onClick}>{button.text||button.icon }</button>
-        )}
-      </div>
-    </>
-  }
-})
+          <span class={s.amount}>￥{refAmount.value}</span>
+        </div>
+        <div class={s.buttons}>
+          {buttons.map((button) => (
+            <button onClick={button.onClick}>
+              {button.text || button.icon}
+            </button>
+          ))}
+        </div>
+      </>
+    );
+  },
+});
