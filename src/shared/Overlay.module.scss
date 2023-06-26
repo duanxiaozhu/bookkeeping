@@ -1,6 +1,4 @@
-
-
-  .mask {
+.mask {
   position: fixed;
   z-index: var(--z-index-overlay);
   top: var(--top-safe-area-height);
@@ -9,6 +7,11 @@
   height: calc(100% - var(--top-safe-area-height));
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+}
+.email {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .overlay {
@@ -21,14 +24,7 @@
   height: calc(100% - var(--top-safe-area-height));
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 
-
-  animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-// &.expand{
-//   animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-// }
-// &.fold{
-//   animation: slide-right2 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-// }
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .currentUser {
@@ -37,13 +33,14 @@
   color: var(--overlay-user-text);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 8px;
-h3{
-  font-size: 18px;
-}
-  >p {
-    margin-top: 4px;
-    font-size: 13px;
+  h3 {
+    font-size: 19px;
   }
+  p {
+    margin-top: 4px;
+    font-size: 14px;
+  }
+
 }
 
 .action {
@@ -57,16 +54,12 @@ h3{
 
   &_list {
     padding-top: 8px;
-
   }
 
-  >.icon {
+  > .icon {
     margin-right: 12px;
   }
 }
-
-
-
 
 @keyframes slide-right {
   0% {
@@ -77,16 +70,5 @@ h3{
   100% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
-  }
-}
-@keyframes slide-right2 {
-  0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-
-  100% {
-    -webkit-transform: translateX(-110%);
-    transform: translateX(-110%);
   }
 }

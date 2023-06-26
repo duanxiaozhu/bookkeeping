@@ -15,6 +15,10 @@ type Tag = {
   sign: string,
   kind: expenses | income
 }
+type User = {
+  id: number;
+  email: string;
+}
 type Resources<T = any> = {
   resources: T[]
   pager: {
