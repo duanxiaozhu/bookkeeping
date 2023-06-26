@@ -1,4 +1,12 @@
-import { defineComponent, onMounted, PropType, ref, watchEffect } from "vue";
+import {
+  defineComponent,
+  onMounted,
+  PropType,
+  reactive,
+  ref,
+  watch,
+  watchEffect,
+} from "vue";
 import { FloatButton } from "../../shared/FloatButton";
 import s from "./ItemSummary.module.scss";
 import { http } from "../../shared/Http";
@@ -22,7 +30,9 @@ export const ItemSummary = defineComponent({
     const hasMore = ref(false);
     const page = ref(0);
     const fetchItems = async () => {
-      if(!props.startDate||!props.endDate){return}
+      if (!props.startDate || !props.endDate) {
+        return;
+      }
       const response = await http.get<Resources<Item>>("/items", {
         happen_after: props.startDate,
         happen_before: props.endDate,
@@ -36,21 +46,65 @@ export const ItemSummary = defineComponent({
       page.value += 1;
     };
     onMounted(fetchItems);
+    watch(
+      () => [props.startDate, props.endDate],
+      () => {
+        items.value = [];
+        hasMore.value = false;
+        page.value = 0;
+        fetchItems();
+      }
+    );
+    const itemsBalance = reactive({
+      expenses: 0,
+      income: 0,
+      balance: 0,
+    });
+    const fetchItemsBalance = async () => {
+      if (!props.startDate || !props.endDate) {
+        return;
+      }
+      const response = await http.get("/items/balance", {
+        happen_after: props.startDate,
+        happen_before: props.endDate,
+        page: page.value + 1,
+        _mock: "itemIndexBalance",
+      });
+      Object.assign(itemsBalance, response.data);
+    };
+    onMounted(fetchItemsBalance);
+    watch(
+      () => [props.startDate, props.endDate],
+      () => {
+        Object.assign(itemsBalance, {
+          expenses: 0,
+          income: 0,
+          balance: 0,
+        });
+        fetchItemsBalance();
+      }
+    );
     return () => (
       <div class={s.wrapper}>
         {items.value ? (
           <>
             <ul class={s.total}>
               <li>
-                <span class={s.numberSize}>128</span>
+                <span class={s.numberSize}>
+                  <Money value={itemsBalance.expenses} />
+                </span>
                 <span>支出</span>
               </li>
               <li>
-                <span class={s.numberSize}>99</span>
+                <span class={s.numberSize}>
+                  <Money value={itemsBalance.income} />
+                </span>
                 <span>收入</span>
               </li>
               <li>
-                <span class={s.numberSize}>39</span>
+                <span class={s.numberSize}>
+                  <Money value={itemsBalance.balance} />
+                </span>
                 <span>净收入</span>
               </li>
             </ul>
@@ -59,14 +113,16 @@ export const ItemSummary = defineComponent({
               {items.value.map((item) => (
                 <li>
                   <div class={s.sign}>
-                    <span>{item.tags_id[0]}</span>
+                    <span>{item.tags![0].sign}</span>
                   </div>
                   <div class={s.text}>
-                    <div class={s.tag}>{item.tags_id[0]}</div>
-                    <div class={s.time}><Datetime value={item.happen_at}/></div>
+                    <div class={s.tag}>{item.tags![0].name}</div>
+                    <div class={s.time}>
+                      <Datetime value={item.happen_at} />
+                    </div>
                   </div>
                   <div class={s.amount}>
-                    ￥<Money value={item.amount}/>
+                    ￥<Money value={item.amount} />
                   </div>
                 </li>
               ))}
