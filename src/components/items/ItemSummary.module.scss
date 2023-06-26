@@ -40,7 +40,7 @@
 }
 
 .bg {
-    height: 18px;
+    min-height: 11px;
     margin: 0 16px;
     border-radius: 10px;
     background: var(--total-text);
@@ -103,6 +103,7 @@
         .time {
             color: var(--list-time-text);
             margin-top: 4px;
+            font-size: 14px;
 
         }
     }
@@ -114,7 +115,7 @@
 }
 
 .more {
-    padding-top: 32px;
+    padding: 16px;
     text-align: center;
     color: var(--list-time-text);
 }
