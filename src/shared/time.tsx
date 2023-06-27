@@ -37,6 +37,41 @@ export class Time {
       .replace(/ss/, second.toString().padStart(2, '0'))
       .replace(/SSS/, msecond.toString().padStart(3, '0'))
   }
+  firstDayOfWeek() {
+    /**
+     * getDate() 返回指定日期为一个月中的哪一天（1-31）
+     * getDay() 返回指定日期中一周的第几天（0 表示星期日）
+     * 这个减法可以直接通过日历直观体验
+     * 默认以星期日作为一周开始日
+     * 这里为了强行用星期一作为一周开始日，暂且用很丑的写法替代
+     */
+    let weekDay = this.date.getDay();
+    weekDay === 0 ? (weekDay = 7) : weekDay;
+    return new Time(
+      new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate() - weekDay + 1,
+        0,
+        0,
+        0
+      )
+    );
+  }
+  lastDayOfWeek() {
+    let weekDay = this.date.getDay();
+    weekDay === 0 ? (weekDay = 7) : weekDay;
+    return new Time(
+      new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate() - weekDay + 1 + 6,
+        23,
+        59,
+        59
+      )
+    );
+  }
   firstDayOfMonth() {
     return new Time(new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0));
   }
@@ -51,6 +86,9 @@ export class Time {
   }
   getRaw() {
     return this.date
+  }
+  getTimestamp() {
+    return this.date.getTime()
   }
   add(amount: number, unit: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond') {
     // return new Time but not change this.date

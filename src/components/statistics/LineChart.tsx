@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, PropType, ref } from "vue";
+import { defineComponent, onMounted, PropType, ref, watch } from "vue";
 import s from "./LineChart.module.scss";
 import * as echarts from "echarts";
 import { Time } from "../../shared/time";
@@ -10,17 +10,16 @@ const option = {
     trigger: "axis",
     formatter: ([item]: any) => {
       const [x, y] = item.data;
-      return `${new Time(new Date(x)).format(
-        "YYYY年MM月DD日"
-      )} ￥${getMoney(y)}`;
+      return `${new Time(new Date(x)).format("YYYY年MM月DD日")} ￥${getMoney(
+        y
+      )}`;
     },
   },
   grid: [{ left: 10, top: 0, right: 10, bottom: 30 }],
   xAxis: {
     type: "category",
     axisLabel: {
-      formatter: (value: string) =>
-        new Time(new Date(value)).format("MM-DD"),
+      formatter: (value: string) => new Time(new Date(value)).format("MM-DD"),
     },
     boundaryGap: ["1%", "1%"], // 左右边界间隙
     axisTick: {
@@ -43,56 +42,33 @@ const option = {
       show: false,
     },
   },
-
 };
 export const LineChart = defineComponent({
+  props: {
+    data: {
+      type: Array as PropType<[string, number][]>,
+      required: true,
+    },
+    kind: {
+      type: String as PropType<string>,
+    },
+  },
   setup: (props, context) => {
     const refDiv = ref<HTMLDivElement>();
-    const data = [
-      ["2018-01-01T00:00:00.000+0800", 150],
-      ["2018-01-02T00:00:00.000+0800", 230],
-      ["2018-01-03T00:00:00.000+0800", 224],
-      ["2018-01-04T00:00:00.000+0800", 218],
-      ["2018-01-05T00:00:00.000+0800", 135],
-      ["2018-01-06T00:00:00.000+0800", 147],
-      ["2018-01-07T00:00:00.000+0800", 260],
-      ["2018-01-08T00:00:00.000+0800", 300],
-      ["2018-01-09T00:00:00.000+0800", 200],
-      ["2018-01-10T00:00:00.000+0800", 300],
-      ["2018-01-11T00:00:00.000+0800", 400],
-      ["2018-01-12T00:00:00.000+0800", 500],
-      ["2018-01-13T00:00:00.000+0800", 400],
-      ["2018-01-14T00:00:00.000+0800", 300],
-      ["2018-01-15T00:00:00.000+0800", 200],
-      ["2018-01-16T00:00:00.000+0800", 100],
-      ["2018-01-17T00:00:00.000+0800", 200],
-      ["2018-01-18T00:00:00.000+0800", 300],
-      ["2018-01-19T00:00:00.000+0800", 400],
-      ["2018-01-20T00:00:00.000+0800", 500],
-      ["2018-01-21T00:00:00.000+0800", 600],
-      ["2018-01-22T00:00:00.000+0800", 700],
-      ["2018-01-23T00:00:00.000+0800", 800],
-      ["2018-01-24T00:00:00.000+0800", 900],
-      ["2018-01-25T00:00:00.000+0800", 1000],
-      ["2018-01-26T00:00:00.000+0800", 1100],
-      ["2018-01-27T00:00:00.000+0800", 1200],
-      ["2018-01-28T00:00:00.000+0800", 1300],
-      ["2018-01-29T00:00:00.000+0800", 1400],
-      ["2018-01-30T00:00:00.000+0800", 1500],
-      ["2018-01-31T00:00:00.000+0800", 1600],
-    ];
+    const refDiv1 = ref<HTMLDivElement>();
+    let chart: echarts.ECharts | undefined = undefined;
+
     onMounted(() => {
       if (refDiv.value === undefined) {
         return;
       }
-      var myChart = echarts.init(refDiv.value);
+      chart = echarts.init(refDiv.value);
 
-
-      myChart.setOption({
+      chart.setOption({
         ...option,
         series: [
           {
-            data: data,
+            data: props.data,
             type: "line",
             smooth: true,
             itemStyle: { color: "#ff585d" },
@@ -125,11 +101,73 @@ export const LineChart = defineComponent({
         ],
       });
     });
+    watch(
+      () => props.data,
+      () => {
+        chart?.setOption({
+          series: [
+            {
+              data: props.data,
+            },
+          ],
+        });
+      }
+    );
+    watch(
+      () => props.kind,
+      () => {
+        if (props.kind === "expenses") {
+          chart?.setOption({
+            series: [
+              {
+                itemStyle: { color: "#ff585d" },
+                areaStyle: {
+                  color: {
+                    colorStops: [
+                      {
+                        offset: 0,
+                        color: "#ff585d", // 0% 处的颜色
+                      },
+                      {
+                        offset: 1,
+                        color: "#ffffff", // 100% 处的颜色
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+          });
+        } else {
+          chart?.setOption({
+            series: [
+              {
+                itemStyle: { color: "#00d09c" },
+                areaStyle: {
+                  color: {
+                    colorStops: [
+                      {
+                        offset: 0,
+                        color: "#53A867", // 0% 处的颜色
+                      },
+                      {
+                        offset: 1,
+                        color: "#ffffff", // 100% 处的颜色
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+          });
+        }
+      }
+    );
     return () => (
       <div class={s.z}>
-        <div class={s.title}>支出趋势</div>
-        <div class={s.lineChartWrapper }>
-          <div ref={refDiv} class={s.wrapper}></div>
+        <div class={s.title}>{props.kind === "expenses" ? "支出趋势" : "收入趋势"}</div>
+        <div ref={refDiv1} class={s.lineChartWrapper}>
+          <div ref={refDiv} class={props.data.length > 7||props.data.length===0 ?s.wrapper: s.lineChartWeek}></div>
         </div>
       </div>
     );

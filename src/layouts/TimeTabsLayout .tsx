@@ -30,7 +30,7 @@ export const TimeTabsLayout = defineComponent({
     }
   },
   setup: (props, context) => {
-    const refSelected = ref('本月')
+    const refSelected = ref('本周')
     const time = new Time()
     const tempTime = reactive({
       start: new Time().format(),
@@ -42,6 +42,10 @@ export const TimeTabsLayout = defineComponent({
     }>({})
     const timeList = [
       {
+        start: time.firstDayOfWeek(),
+        end: time.lastDayOfWeek(),
+      },
+      {
         start: time.firstDayOfMonth(),
         end: time.lastDayOfMonth()
       },
@@ -49,10 +53,6 @@ export const TimeTabsLayout = defineComponent({
         start: time.add(-1, 'month').firstDayOfMonth(),
         end: time.add(-1, 'month').lastDayOfMonth()
       },
-      {
-        start: time.firstDayOfYear(),
-        end: time.lastDayOfYear()
-      }
     ]
     const refOverlayVisible = ref(false)
     const onSubmitCustomTime = (e: Event) => {
@@ -74,17 +74,17 @@ export const TimeTabsLayout = defineComponent({
             <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}
               onUpdate:selected={onSelect}
               rerenderOnSelect={props.rerenderOnSwitchTab}>
-              <Tab name="本月">
+              <Tab name="本周">
                 <props.component
                   startDate={timeList[0].start.format()}
                   endDate={timeList[0].end.format()} />
               </Tab>
-              <Tab name="上月">
+              <Tab name="本月">
                 <props.component
                   startDate={timeList[1].start.format()}
                   endDate={timeList[1].end.format()} />
               </Tab>
-              <Tab name="今年">
+              <Tab name="上月">
                 <props.component
                   startDate={timeList[2].start.format()}
                   endDate={timeList[2].end.format()} />
