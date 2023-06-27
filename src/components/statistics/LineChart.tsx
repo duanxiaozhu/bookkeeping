@@ -120,13 +120,13 @@ export const LineChart = defineComponent({
           chart?.setOption({
             series: [
               {
-                itemStyle: { color: "#ff585d" },
+                itemStyle: { color: "#ff4f52" },
                 areaStyle: {
                   color: {
                     colorStops: [
                       {
                         offset: 0,
-                        color: "#ff585d", // 0% 处的颜色
+                        color: "#ff4f52", // 0% 处的颜色
                       },
                       {
                         offset: 1,

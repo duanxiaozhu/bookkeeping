@@ -1,15 +1,24 @@
-.title{
-    background: white;
+.wrapper_bg {
+  background: white;
+  margin: 0 8px 0 8px;
+  border-radius: 10px;
+  margin-bottom: 60px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  .title {
     margin-top: 16px;
     padding: 10px;
     height: 48px;
     font-size: 18px;
     font-weight: 700;
     color: var(--welcome-text);
-}
-.wrapper {
-    margin-bottom: 128px;
-    background: var(--emojiList-bg);
+  }
+  .wrapper {
+    max-height: 321px;
+    padding-bottom: 1px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   .topItem {
     margin-bottom: 16px;
@@ -52,22 +61,14 @@
         top: 0;
         left: 0;
         height: 100%;
-        width: 42px;
+        transition: width 500ms;
       }
     }
-    &:nth-child(1) {
-      .bar_inner {
-        background: #eba953;
-      }
+    .expensesBar {
+      background-image: linear-gradient(to right, #ffacae 0%, #ff4f52 100%);
     }
-    &:nth-child(2) {
-      .bar_inner {
-        background: #53a867;
-      }
-    }
-    &:nth-child(3) {
-      .bar_inner {
-        background: #91cc75;
-      }
+    .incomeBar {
+      background-image: linear-gradient(to right, #77e0c8 0%, #53A867 100%);
     }
   }
+}
