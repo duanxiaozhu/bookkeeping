@@ -1,14 +1,17 @@
-.wrapper {
+.wrapper_bg {
+  background: white;
+  margin: 0 8px 0 8px;
+  border-radius: 10px;
+  .wrapper {
     max-height: 300px;
     height: 35vh;
-    background: white;
-}
-.title{
-    background: white;
+  }
+  .title {
     padding: 10px;
     height: 48px;
     margin-top: 16px;
     font-size: 18px;
     font-weight: 700;
     color: var(--welcome-text);
+  }
 }

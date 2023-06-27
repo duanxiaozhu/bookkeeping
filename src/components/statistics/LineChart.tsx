@@ -164,10 +164,19 @@ export const LineChart = defineComponent({
       }
     );
     return () => (
-      <div class={s.z}>
-        <div class={s.title}>{props.kind === "expenses" ? "支出趋势" : "收入趋势"}</div>
+      <div class={s.wrapper_bg}>
+        <div class={s.title}>
+          {props.kind === "expenses" ? "支出趋势" : "收入趋势"}
+        </div>
         <div ref={refDiv1} class={s.lineChartWrapper}>
-          <div ref={refDiv} class={props.data.length > 7||props.data.length===0 ?s.wrapper: s.lineChartWeek}></div>
+          <div
+            ref={refDiv}
+            class={
+              props.data.length > 7 || props.data.length === 0
+                ? s.wrapper
+                : s.lineChartWeek
+            }
+          ></div>
         </div>
       </div>
     );
