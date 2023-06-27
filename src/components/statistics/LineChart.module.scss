@@ -1,13 +1,24 @@
-.wrapper {
-    height: 211px;
-    background: white;
-}
-.title{
-    background: white;
+.z {
+  background: white;
+  margin: 0 8px 0 8px;
+  border-radius: 10px;
+
+  .lineChartWrapper {
+    overflow: auto;
+    .wrapper {
+      height: 211px;
+      width: 440%;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .title {
     margin-top: 16px;
     padding: 10px;
     height: 48px;
     font-size: 18px;
     font-weight: 700;
     color: var(--welcome-text);
+  }
 }
