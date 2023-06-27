@@ -15,7 +15,7 @@ const option = {
       )}`;
     },
   },
-  grid: [{ left: 10, top: 0, right: 10, bottom: 30 }],
+  grid: [{ left: 10, top: 4, right: 10, bottom: 30 }],
   xAxis: {
     type: "category",
     axisLabel: {
