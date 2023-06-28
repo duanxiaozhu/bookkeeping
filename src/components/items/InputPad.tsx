@@ -137,9 +137,8 @@ export const InputPad = defineComponent({
     const minDate = new Date(2020, 0, 1);
     const maxDate = new Date(2030, 0, 1);
     const refDatePickerVisible = ref(false);
-    let refDate2 = new Date();
     const showDatePicker = () => {
-      (refDatePickerVisible.value = true), (refDate2 = new Date());
+      (refDatePickerVisible.value = true);
     };
     const hideDatePicker = () => (refDatePickerVisible.value = false);
     const setDate = (date: Date) => {
@@ -161,8 +160,7 @@ export const InputPad = defineComponent({
                 v-model:show={refDatePickerVisible.value}
               >
                 <DatetimePicker
-                  value={props.happenAt}
-                  v-model={refDate2}
+                  modelValue={props.happenAt ? new Date(props.happenAt) : new Date()}
                   type="date"
                   title="选择年月日"
                   min-date={minDate}
