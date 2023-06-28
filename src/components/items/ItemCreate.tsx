@@ -9,7 +9,7 @@ import { useRouter } from "vue-router";
 import { AxiosError } from "axios";
 import { Dialog, Notify } from "vant";
 import { http } from "../../shared/Http";
-import { BackIcon } from '../../shared/BackIcon';
+import { BackIcon } from "../../shared/BackIcon";
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -17,7 +17,7 @@ export const ItemCreate = defineComponent({
     },
   },
   setup: (props, context) => {
-    const formDate = reactive({
+    const formData = reactive({
       kind: "支出",
       tags_id: [],
       amount: 0,
@@ -35,16 +35,11 @@ export const ItemCreate = defineComponent({
     };
     const onSubmit = async () => {
       await http
-        .post<Resource<Item>>("/items", formDate, {
-          params: { _mock: "itemCreate" },
+        .post<Resource<Item>>("/items", formData, {
+          _mock: "itemCreate",
+          _autoLoading: true,
         })
         .catch(onError);
-      Notify({
-        type: "success",
-        message: "记账成功",
-        duration: 1000,
-        background: "#53A867",
-      });
       router.push("/items");
     };
     return () => (
@@ -55,24 +50,24 @@ export const ItemCreate = defineComponent({
           default: () => (
             <>
               <div class={s.wrapper}>
-                <Tabs v-model:selected={formDate.kind} class={s.tabs}>
+                <Tabs v-model:selected={formData.kind} class={s.tabs}>
                   <Tab name="支出" class={s.tags_wrapper}>
                     <Tags
                       kind="expenses"
-                      v-model:selected={formDate.tags_id[0]}
+                      v-model:selected={formData.tags_id[0]}
                     />
                   </Tab>
                   <Tab name="收入" class={s.tags_wrapper}>
                     <Tags
                       kind="income"
-                      v-model:selected={formDate.tags_id[0]}
+                      v-model:selected={formData.tags_id[0]}
                     />
                   </Tab>
                 </Tabs>
                 <div class={s.inputPad_wrapper}>
                   <InputPad
-                    v-model:happenAt={formDate.happen_at}
-                    v-model:amount={formDate.amount}
+                    v-model:happenAt={formData.happen_at}
+                    v-model:amount={formData.amount}
                     onSubmit={onSubmit}
                   />
                 </div>

@@ -15,36 +15,47 @@ export const Tags = defineComponent({
   emits: ["update:selected"],
   setup: (props, context) => {
     const { tags, hasMore, page, fetchTags } = useTags((page) => {
-      return http.get<Resources<Tag>>("/tags", {
-        kind: props.kind,
-        page: page + 1,
-        _mock: "tagIndex",
-      });
+      return http.get<Resources<Tag>>(
+        "/tags",
+        {
+          kind: props.kind,
+          page: page + 1,
+        },
+        {
+          _mock: "tagIndex",
+          _autoLoading: true,
+        }
+      );
     });
     const onSelect = (tag: Tag) => {
       context.emit("update:selected", tag.id);
     };
-    const timer=ref<number>()
-    const currentTag=ref<HTMLDivElement>()
-    const router=useRouter()
-    const onLongPress=(tagId:Tag['id'])=>{
-      router.push(`/tags/${tagId}/edit?kind=${props.kind}&return_to=${router.currentRoute.value.fullPath}`)
-    }
-    const onTouchStart=(e:TouchEvent,tag:Tag)=>{
-      currentTag.value=e.currentTarget as HTMLDivElement
-      timer.value=setTimeout(()=>{
-        onLongPress(tag.id)
-      },500) 
-    }
+    const timer = ref<number>();
+    const currentTag = ref<HTMLDivElement>();
+    const router = useRouter();
+    const onLongPress = (tagId: Tag["id"]) => {
+      router.push(
+        `/tags/${tagId}/edit?kind=${props.kind}&return_to=${router.currentRoute.value.fullPath}`
+      );
+    };
+    const onTouchStart = (e: TouchEvent, tag: Tag) => {
+      currentTag.value = e.currentTarget as HTMLDivElement;
+      timer.value = setTimeout(() => {
+        onLongPress(tag.id);
+      }, 500);
+    };
     const onTouchEnd = (e: TouchEvent) => {
-      clearTimeout(timer.value)
-    }
-    const onTouchmove=(e:TouchEvent)=>{
-      const pointedElement=document.elementFromPoint(e.touches[0].clientX,e.touches[0].clientY)
-      if(currentTag.value?.contains(pointedElement)===false){
-        clearTimeout(timer.value)
+      clearTimeout(timer.value);
+    };
+    const onTouchmove = (e: TouchEvent) => {
+      const pointedElement = document.elementFromPoint(
+        e.touches[0].clientX,
+        e.touches[0].clientY
+      );
+      if (currentTag.value?.contains(pointedElement) === false) {
+        clearTimeout(timer.value);
       }
-    }
+    };
     return () => (
       <>
         <div class={s.tags_wrapper} onTouchmove={onTouchmove}>
@@ -58,7 +69,7 @@ export const Tags = defineComponent({
             <div
               class={[s.tag, props.selected === tag.id ? s.selected : ""]}
               onClick={() => onSelect(tag)}
-              onTouchstart={(e)=>onTouchStart(e,tag)}
+              onTouchstart={(e) => onTouchStart(e, tag)}
               onTouchend={onTouchEnd}
             >
               <div class={s.sign}>{tag.sign}</div>
