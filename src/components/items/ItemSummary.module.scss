@@ -119,3 +119,25 @@
     text-align: center;
     color: var(--list-time-text);
 }
+.button {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    &_wrapper {
+        padding: 16px 16px;
+    }
+}
+
+.noData_wrapper {
+    padding: 80px 0;
+
+    .noData {
+        width: 128px;
+        height: 128px;
+    }
+
+    >span {
+        font-size: 18px;
+        color: #969593;
+    }
+}

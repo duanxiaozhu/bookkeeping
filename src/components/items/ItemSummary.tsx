@@ -11,9 +11,11 @@ import { FloatButton } from "../../shared/FloatButton";
 import s from "./ItemSummary.module.scss";
 import { http } from "../../shared/Http";
 import { Center } from "../../shared/Center";
-import { Icon } from "vant";
 import { Money } from "../../shared/Money";
 import { Datetime } from "../../shared/Datetime";
+import { RouterLink } from "vue-router";
+import { Button } from "../../shared/Button";
+import { Icon } from "../../shared/Icon";
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -97,7 +99,7 @@ export const ItemSummary = defineComponent({
     );
     return () => (
       <div class={s.wrapper}>
-        {items.value ? (
+        {items.value&&items.value.length>0 ? (
           <>
             <ul class={s.total}>
               <li>
@@ -147,13 +149,21 @@ export const ItemSummary = defineComponent({
             </ol>
           </>
         ) : (
-          <Center class={s.noData_wrapper} direction="|">
-            <Icon name="noData" class={s.noData} />
-            <span>暂无数据</span>
-          </Center>
+          <>
+            <Center class={s.noData_wrapper} direction="|">
+              <Icon name="noData" class={s.noData} />
+              <span>暂无数据</span>
+            </Center>
+            <div class={s.button_wrapper}>
+              <RouterLink to="/items/create">
+                <Button class={s.button}>开始记账</Button>
+              </RouterLink>
+            </div>
+          </>
         )}
-
-        <FloatButton iconName="add" />
+        <RouterLink to="/items/create">
+          <FloatButton iconName='add' />
+        </RouterLink>
       </div>
     );
   },
