@@ -8,6 +8,7 @@ type Rule<T> = {
   | { type: "required" }
   | { type: "pattern"; regex: RegExp }
   | { type: "notEqual"; value: JSONValue }
+  | { type: "notLengthEqual"; length: JSONValue }
 );
 type Rules<T> = Rule<T>[];
 export type { Rules, Rule, FData };
@@ -33,10 +34,18 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
         }
         break;
       case "notEqual":
-        if (!isEmpty(value) || value === rule.value) {
+        console.log(value.length)
+        if (!isEmpty(value) && value === rule.value) {
           errors[key] = errors[key] ?? [];
           errors[key]?.push(message);
         }
+        break;
+        case "notLengthEqual":
+          console.log(value.length)
+          if (!isEmpty(value) && value.length === rule.length) {
+            errors[key] = errors[key] ?? [];
+            errors[key]?.push(message);
+          }
       default:
         return;
     }
