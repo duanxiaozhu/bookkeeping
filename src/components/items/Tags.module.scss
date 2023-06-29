@@ -47,6 +47,24 @@
       .sign {
         background:  var(--selectedTag-bg);
         border: 1px solid var(--button-bg);
+        animation: shake 0.3s linear;
       }
+    }
+  }
+  @keyframes shake {
+    0% {
+      transform: rotate(0deg);
+    }
+    20% {
+      transform: rotate(20deg);
+    }
+    40% {
+      transform: rotate(0deg);
+    }
+    80% {
+      transform: rotate(-20deg);
+    }
+    100% {
+      transform: rotate(0deg);
     }
   }

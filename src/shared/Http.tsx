@@ -67,9 +67,9 @@ export class Http {
   }
 }
 const mock = (response: AxiosResponse) => {
-  if (
+  if (true||
     location.hostname !== "localhost" &&
-    location.hostname !== "127.27.176.1" &&
+    location.hostname !== "127.0.0.1" &&
     location.hostname !== "192.168.0.108"
   ) {
     return false;
