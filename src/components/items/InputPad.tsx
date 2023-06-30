@@ -5,6 +5,7 @@ import { Icon } from "../../shared/Icon";
 import s from "./InputPad.module.scss";
 export const InputPad = defineComponent({
   props: {
+    kind: String,
     happenAt: String,
     amount: Number,
     onSubmit: {
@@ -171,9 +172,9 @@ export const InputPad = defineComponent({
               </Popup>
             </span>
           </span>
-          <span class={s.amount}>￥{refAmount.value}</span>
+          <span class={props.kind==='expenses'?s.amountRed:s.amount}>￥{refAmount.value}</span>
         </div>
-        <div class={s.buttons}>
+        <div class={[s.buttons ,props.kind==='income'?s.buttons_income:'']}>
           {buttons.map((button) => (
             <button onClick={button.onClick}>
               {button.text || button.icon}

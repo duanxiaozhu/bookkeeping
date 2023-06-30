@@ -41,7 +41,7 @@ export const Bars = defineComponent({
               );
             })
           ) : (
-            <div>没有数据</div>
+            <div class={s.notData}>没有数据</div>
           )}
         </div>
       </div>

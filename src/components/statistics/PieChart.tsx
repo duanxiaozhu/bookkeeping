@@ -1,9 +1,14 @@
 import { defineComponent, onMounted, PropType, ref, watch } from "vue";
 import s from "./PieChart.module.scss";
 import * as echarts from "echarts";
+import { getMoney } from "../../shared/Money";
 const defaultOption = {
   tooltip: {
     trigger: "item",
+    formatter:(item:{name:string;value:number;percent:number})=>{
+      const{name,value,percent}=item;
+      return`${name}：￥${getMoney(value)}`
+    }
   },
   legend: {
     top: "0%",

@@ -60,7 +60,7 @@ export const Tags = defineComponent({
       <>
         <div class={s.tags_wrapper} onTouchmove={onTouchmove}>
           <RouterLink to={`/tags/create?kind=${props.kind}`} class={s.tag}>
-            <div class={[s.sign, , s.createButton]}>
+            <div class={[s.sign, s.createButton]}>
               <Icon name="add" class={s.createTag} />
             </div>
             <div class={s.name}>新增</div>

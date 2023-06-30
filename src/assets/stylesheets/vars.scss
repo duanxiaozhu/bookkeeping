@@ -31,8 +31,7 @@
     --inputPad-radius:10px;
     --inputPad-text:var(--welcome-text);
     --button-active:#f6f7f9;
-    --inputPad-button-bg-ok:var(--amount-text);
-    --button-active-ok:#79a4f9; 
+    --inputPad-button-bg-ok:var(--total-expenses);
     --input-min-height: 48px;
     --input-border-color: white;
     --input-radius: var(--inputPad-radius);
@@ -51,8 +50,8 @@
     --list-time-text: var(--emoji-nav-text);
     --total-bg: white;
     --total-text: var(--welcome-text);
-    --total-income: #FE7275;
-    --total-expenses: #53A867;
+    --total-income: #3cab56;
+    --total-expenses: #ff4f52;
     --dialog-header-text: white;
     --bg:var(--welcome-bg);
     --select-bg:#ff4f52;

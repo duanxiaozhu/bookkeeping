@@ -28,9 +28,13 @@
         margin-right: 8px;
       }
     }
-    >.amount{
+    >.amountRed{
       font-size: 28px;
-      color: var(--amount-text);
+      color: var(--total-expenses);
+    }
+    .amount{
+      font-size: 28px;
+      color: var(--total-income);
     }
   }
   .buttons {
@@ -127,7 +131,7 @@
     }
     > button:nth-child(14):active {
       transform: scale(0.9);
-      background-color: var(--button-active-ok);
+      opacity: 0.6;
     }
   
     .delete {
@@ -143,3 +147,13 @@
   
 
   }
+  .buttons_income{
+    > button {
+    &:nth-child(14) {
+      background-color: var(--total-income);
+      border: 1px solid var(--total-income);
+      box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    }
+  }
+  }
+

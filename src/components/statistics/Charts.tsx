@@ -55,7 +55,7 @@ export const Charts = defineComponent({
           .getTimestamp();
         const item = data1.value[0];
         const amount =
-          item && new Date(item.happen_at).getTime() === time
+          item && new Date(item.happen_at + "T00:00:00.000+0800").getTime() === time
             ? data1.value.shift()!.amount
             : 0;
         return [new Date(time).toISOString(), amount];
@@ -75,7 +75,7 @@ export const Charts = defineComponent({
           _autoLoading: true,
         }
       );
-      data1.value = response.data.groups;
+      data1.value = (response.data.groups).reverse();
     };
 
     // 设置饼图

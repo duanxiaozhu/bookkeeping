@@ -99,7 +99,7 @@ export const ItemSummary = defineComponent({
     );
     return () => (
       <div class={s.wrapper}>
-        {items.value&&items.value.length>0 ? (
+        {items.value && items.value.length > 0 ? (
           <>
             <ul class={s.total}>
               <li>
@@ -134,8 +134,11 @@ export const ItemSummary = defineComponent({
                       <Datetime value={item.happen_at} />
                     </div>
                   </div>
-                  <div class={s.amount}>
-                    ￥<Money value={item.amount} />
+                  <div
+                    class={item.kind === "expenses" ? s.amountRed : s.amount}
+                  >
+                    ￥{item.kind === "expenses" ? "-" : "+"}
+                    <Money value={item.amount} />
                   </div>
                 </li>
               ))}
@@ -147,6 +150,9 @@ export const ItemSummary = defineComponent({
                 )}
               </div>
             </ol>
+            <RouterLink to="/items/create">
+              <FloatButton iconName="add" />
+            </RouterLink>
           </>
         ) : (
           <>
@@ -161,9 +167,6 @@ export const ItemSummary = defineComponent({
             </div>
           </>
         )}
-        <RouterLink to="/items/create">
-          <FloatButton iconName='add' />
-        </RouterLink>
       </div>
     );
   },

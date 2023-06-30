@@ -86,6 +86,7 @@ export const ItemCreate = defineComponent({
                     v-model:happenAt={formData.happen_at}
                     v-model:amount={formData.amount}
                     onSubmit={onSubmit}
+                    kind={formData.kind}
                   />
                 </div>
               </div>

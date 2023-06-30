@@ -25,11 +25,11 @@
         text-align: center;
 
         &:first-child {
-            color: var(--total-income);
+            color: var(--total-expenses);
         }
 
         &:nth-child(2) {
-            color: var(--total-expenses);
+            color: var(--total-income);
         }
 
         >.numberSize {
@@ -109,7 +109,11 @@
     }
 
     .amount {
-        color: var(--list-amount-text);
+        color: var(--total-income);
+        font-weight: 700;
+    }
+    .amountRed {
+        color: var(--total-expenses);
         font-weight: 700;
     }
 }

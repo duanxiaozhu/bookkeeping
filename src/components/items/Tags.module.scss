@@ -51,6 +51,10 @@
       }
     }
   }
+  .createButton:active {
+    transform: scale(0.95);
+    opacity:0.5 ;
+  }
   @keyframes shake {
     0% {
       transform: rotate(0deg);
