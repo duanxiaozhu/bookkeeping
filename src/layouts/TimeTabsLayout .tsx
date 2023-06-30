@@ -27,7 +27,8 @@ export const TimeTabsLayout = defineComponent({
     rerenderOnSwitchTab: {
       type: Boolean,
       default: false
-    }
+    },
+    title:String
   },
   setup: (props, context) => {
     const refSelected = ref('本周')
@@ -68,7 +69,7 @@ export const TimeTabsLayout = defineComponent({
     return () => (
       <MainLayout>{
         {
-          title: () => '小段记账',
+          title: () => props.title?props.title:'小段记账',
           icon: () => <OverlayIcon />,
           default: () => <>
             <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}
