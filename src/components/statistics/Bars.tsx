@@ -2,6 +2,8 @@ import { computed, defineComponent, PropType, reactive } from "vue";
 import s from "./Bars.module.scss";
 import { Divider } from "vant";
 import { Money } from "../../shared/Money";
+import { Center } from "../../shared/Center";
+import { Icon } from "../../shared/Icon";
 export const Bars = defineComponent({
   props: {
     data: {
@@ -41,7 +43,10 @@ export const Bars = defineComponent({
               );
             })
           ) : (
-            <div class={s.notData}>没有数据</div>
+          <Center class={s.noData_wrapper} direction="|">
+            <Icon name="noData" class={s.noData} />
+            <span>暂无数据</span>
+          </Center>
           )}
         </div>
       </div>

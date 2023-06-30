@@ -77,3 +77,16 @@
   margin-bottom: 20px;
   color: var(--emoji-nav-text);
 }
+.noData_wrapper {
+  padding: 80px 0;
+
+  .noData {
+      width: 128px;
+      height: 128px;
+  }
+
+  >span {
+      font-size: 18px;
+      color: #969593;
+  }
+}
