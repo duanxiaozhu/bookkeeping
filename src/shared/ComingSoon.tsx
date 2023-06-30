@@ -14,7 +14,7 @@ export const ComingSoon = defineComponent({
           icon: () => <BackIcon />,
           default: () => (
             <>
-              <Center class={s.wrapper} direction="|">ComingSoon
+              <Center class={s.wrapper} direction="|">
                 <Icon name="ComingSoon" class={s.coming} />
               </Center>
               <p class={s.text}>敬请期待</p>
