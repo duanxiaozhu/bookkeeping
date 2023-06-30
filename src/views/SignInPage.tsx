@@ -7,13 +7,13 @@ import { hasError, validate } from "../shared/validate";
 import { Button } from "../shared/Button";
 import { useBool } from "../hooks/useBool";
 import { http } from "../shared/Http";
-import { history } from "../shared/history";
+import { useMeStore } from '../stores/useMeStore';
 import { useRoute, useRouter } from "vue-router";
-import { refreshMe } from "../shared/me";
 import { BackIcon } from "../shared/BackIcon";
 
 export const SignInPage = defineComponent({
   setup: (props, context) => {
+    const meStore = useMeStore()
     const formData = reactive({
       email: "zhuolin1014@163.com",
       code: "123456",
@@ -57,7 +57,7 @@ export const SignInPage = defineComponent({
         localStorage.setItem("jwt", response.data.jwt);
         // router.push('/sign_in?return_to='+ encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString();
-        refreshMe();
+        meStore.refreshMe();
         router.push(returnTo || "/");
       }
     };
