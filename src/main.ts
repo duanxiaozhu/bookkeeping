@@ -41,7 +41,7 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
     }
     return meStore.mePromise!.then(
       () => true,
-      () => '/sign_in?return_to=' + to.path
+      () => '/sign_in?return_to=' + from.path
     )
 })
 
