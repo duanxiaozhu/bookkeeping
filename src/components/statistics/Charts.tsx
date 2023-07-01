@@ -13,6 +13,9 @@ import { PieChart } from "./PieChart";
 import { Bars } from "./Bars";
 import { http } from "../../shared/Http";
 import { Time } from "../../shared/time";
+import { Center } from "../../shared/Center";
+import { Icon } from "../../shared/Icon";
+import { useTypesStore } from "../../stores/useTypesStore";
 
 const DAY = 24 * 3600 * 1000;
 
@@ -32,14 +35,18 @@ export const Charts = defineComponent({
     },
   },
   setup: (props, context) => {
+    const typeStore = useTypesStore()
     const columns = ["支出", "收入"];
-    const result = ref("支出");
-    const kind = ref("expenses");
+    typeStore.getTypes()
+    console.log(typeStore.result)
+    const result = ref(typeStore.result||"支出");
+    const kind = ref(typeStore.kind||"expenses");
     const showPicker = ref(false);
     const onConfirm = (value: string) => {
       result.value = value;
       showPicker.value = false;
       value === "支出" ? (kind.value = "expenses") : (kind.value = "income");
+      typeStore.setTypes(value,kind.value)
     };
     const data1 = ref<Data1>([]);
     const betterData1 = computed<[string, number][]>(() => {
@@ -55,7 +62,8 @@ export const Charts = defineComponent({
           .getTimestamp();
         const item = data1.value[0];
         const amount =
-          item && new Date(item.happen_at + "T00:00:00.000+0800").getTime() === time
+          item &&
+          new Date(item.happen_at + "T00:00:00.000+0800").getTime() === time
             ? data1.value.shift()!.amount
             : 0;
         return [new Date(time).toISOString(), amount];
@@ -75,7 +83,7 @@ export const Charts = defineComponent({
           _autoLoading: true,
         }
       );
-      data1.value = (response.data.groups).reverse();
+      data1.value = response.data.groups.reverse();
     };
 
     // 设置饼图
@@ -115,30 +123,36 @@ export const Charts = defineComponent({
         percent: Math.round((item.amount / total) * 100 * 100) / 100,
       }));
     });
-    return () => (
-      <div class={s.wrapper}>
-        <div class={s.select}>
-          <Field
-            class={[s.input, result.value === "收入" ? s.green : ""]}
-            v-model={result.value}
-            is-link
-            readonly
-            label="类型"
-            placeholder="选择类型"
-            onClick={() => (showPicker.value = true)}
-          />
-          <Popup v-model:show={showPicker.value} round position="bottom">
-            <Picker
-              columns={columns}
-              onCancel={() => (showPicker.value = false)}
-              onConfirm={onConfirm}
+    return () =>
+      !props.endDate || !props.startDate ? (
+        <Center class={s.noData_wrapper} direction="|">
+          <Icon name="noData" class={s.noData} />
+          <span>请先选择时间</span>
+        </Center>
+      ) : (
+        <div class={s.wrapper}>
+          <div class={s.select}>
+            <Field
+              class={[s.input, result.value === "收入" ? s.green : ""]}
+              v-model={result.value}
+              is-link
+              readonly
+              label="类型"
+              placeholder="选择类型"
+              onClick={() => (showPicker.value = true)}
             />
-          </Popup>
+            <Popup v-model:show={showPicker.value} round position="bottom">
+              <Picker
+                columns={columns}
+                onCancel={() => (showPicker.value = false)}
+                onConfirm={onConfirm}
+              />
+            </Popup>
+          </div>
+          <LineChart data={betterData1.value} kind={kind.value} />
+          <PieChart data={betterData2.value} kind={kind.value} />
+          <Bars data={betterData3.value} kind={kind.value} />
         </div>
-        <LineChart data={betterData1.value} kind={kind.value} />
-        <PieChart data={betterData2.value} kind={kind.value} />
-        <Bars data={betterData3.value} kind={kind.value} />
-      </div>
-    );
+      );
   },
 });
