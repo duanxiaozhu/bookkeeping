@@ -55,6 +55,7 @@ export const TimeTabsLayout = defineComponent({
         end: time.add(-1, 'month').lastDayOfMonth()
       },
     ]
+    console.log(tempTime.end)
     const refOverlayVisible = ref(false)
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
@@ -78,22 +79,22 @@ export const TimeTabsLayout = defineComponent({
               <Tab value='本周' name="本周">
                 <props.component
                   startDate={timeList[0].start.format()}
-                  endDate={timeList[0].end.format()} />
+                  endDate={timeList[0].end.format('YYYY-MM-DD HH:mm:ss')} />
               </Tab>
               <Tab value='本月' name="本月">
                 <props.component
                   startDate={timeList[1].start.format()}
-                  endDate={timeList[1].end.format()} />
+                  endDate={timeList[1].end.format('YYYY-MM-DD HH:mm:ss')} />
               </Tab>
               <Tab value='上月' name="上月">
                 <props.component
                   startDate={timeList[2].start.format()}
-                  endDate={timeList[2].end.format()} />
+                  endDate={timeList[2].end.format('YYYY-MM-DD HH:mm:ss')} />
               </Tab>
               <Tab value='自定义时间' name="自定义时间">
                 <props.component
                   startDate={customTime.start}
-                  endDate={customTime.end} />
+                  endDate={customTime.end+' 23:59:59'} />
               </Tab>
             </Tabs>
             <Overlay show={refOverlayVisible.value} class={s.overlay} >
