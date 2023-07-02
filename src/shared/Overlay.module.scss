@@ -63,8 +63,8 @@
 
 @keyframes slide-right {
   0% {
-    -webkit-transform: translateX(-100px);
-    transform: translateX(-100px);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 
   100% {

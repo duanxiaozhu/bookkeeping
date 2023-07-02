@@ -18,6 +18,7 @@ body{
     padding-right: 16px;
   }
 }
+.van-cell{
 .van-field__label{
   font-size: 16px;
   color: white;
@@ -34,4 +35,8 @@ body{
   width: 50px;
   color: white;
   text-align: right;
+}
+}
+.router-link-active{
+  background: var(--overlay-link-bg);
 }
