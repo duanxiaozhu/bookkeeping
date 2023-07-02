@@ -63,7 +63,7 @@ export const LineChart = defineComponent({
         return;
       }
       chart = echarts.init(refDiv.value);
-
+    props.kind==='expenses'?
       chart.setOption({
         ...option,
         series: [
@@ -99,70 +99,113 @@ export const LineChart = defineComponent({
             },
           },
         ],
-      });
+      },true):      
+      chart.setOption({
+        ...option,
+        series: [
+          {
+            data: props.data,
+            type: "line",
+            smooth: true,
+            itemStyle: { color: "#53A867" },
+            areaStyle: {
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "#53A867", // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: "#ffffff", // 100% 处的颜色
+                  },
+                ],
+                global: false, // 缺省为 false
+              },
+            },
+          },
+        ],
+      },true)
     });
     watch(
       () => props.data,
       () => {
+        props.kind==='expenses'?
         chart?.setOption({
+          ...option,
           series: [
             {
               data: props.data,
+              type: "line",
+              smooth: true,
+              itemStyle: { color: "#ff585d" },
+              areaStyle: {
+                color: {
+                  /**
+                   * 线性渐变
+                   * 前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比
+                   * 如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
+                   */
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "#ff585d", // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "#ffffff", // 100% 处的颜色
+                    },
+                  ],
+                  global: false, // 缺省为 false
+                },
+              },
             },
           ],
-        });
-      }
-    );
-    watch(
-      () => props.kind,
-      () => {
-        if (props.kind === "expenses") {
-          chart?.setOption({
-            series: [
-              {
-                itemStyle: { color: "#ff4f52" },
-                areaStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#ff4f52", // 0% 处的颜色
-                      },
-                      {
-                        offset: 1,
-                        color: "#ffffff", // 100% 处的颜色
-                      },
-                    ],
-                  },
+        },true):      
+        chart?.setOption({
+          ...option,
+          series: [
+            {
+              data: props.data,
+              type: "line",
+              smooth: true,
+              itemStyle: { color: "#53A867" },
+              areaStyle: {
+                color: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "#53A867", // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "#ffffff", // 100% 处的颜色
+                    },
+                  ],
+                  global: false, // 缺省为 false
                 },
               },
-            ],
-          });
-        } else {
-          chart?.setOption({
-            series: [
-              {
-                itemStyle: { color: "#00d09c" },
-                areaStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#53A867", // 0% 处的颜色
-                      },
-                      {
-                        offset: 1,
-                        color: "#ffffff", // 100% 处的颜色
-                      },
-                    ],
-                  },
-                },
-              },
-            ],
-          });
-        }
+            },
+          ],
+        },true)
       }
     );
+
     return () => (
       <div class={s.wrapper_bg}>
         <div class={s.title}>

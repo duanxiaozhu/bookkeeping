@@ -16,6 +16,7 @@ import { Time } from "../../shared/time";
 import { Center } from "../../shared/Center";
 import { Icon } from "../../shared/Icon";
 import { useTypesStore } from "../../stores/useTypesStore";
+import { Value } from 'sass';
 
 const DAY = 24 * 3600 * 1000;
 
@@ -38,7 +39,6 @@ export const Charts = defineComponent({
     const typeStore = useTypesStore()
     const columns = ["支出", "收入"];
     typeStore.getTypes()
-    console.log(typeStore.result)
     const result = ref(typeStore.result||"支出");
     const kind = ref(typeStore.kind||"expenses");
     const showPicker = ref(false);
@@ -109,9 +109,11 @@ export const Charts = defineComponent({
     };
     onMounted(fetchData2);
     watch(() => kind.value, fetchData2);
+    watch(()=>props.startDate,fetchData2)
 
     onMounted(fetchData1);
     watch(() => kind.value, fetchData1);
+    watch(()=>props.startDate,fetchData1)
 
     // 设置条形图
     const betterData3 = computed<
