@@ -1,6 +1,6 @@
-import { DatetimePicker, Popup ,Picker,Field} from 'vant';
+import { DatetimePicker, Popup} from 'vant';
 import { getFriendlyError } from './getFriendlyError';
-import { computed, defineComponent, PropType, ref, VNode } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { EmojiSelect } from './EmojiSelect';
 import s from './Form.module.scss';
 import { Time } from './time';

@@ -55,7 +55,6 @@ export const TimeTabsLayout = defineComponent({
         end: time.add(-1, 'month').lastDayOfMonth()
       },
     ]
-    console.log(tempTime.end)
     const refOverlayVisible = ref(false)
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()

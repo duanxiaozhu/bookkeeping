@@ -1,11 +1,8 @@
 import {
   defineComponent,
-  onMounted,
   PropType,
   reactive,
-  ref,
   watch,
-  watchEffect,
 } from "vue";
 import { FloatButton } from "../../shared/FloatButton";
 import s from "./ItemSummary.module.scss";

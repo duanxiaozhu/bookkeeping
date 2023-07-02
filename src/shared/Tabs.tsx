@@ -34,8 +34,7 @@ export const Tabs = defineComponent({
     onMounted(toggleNav);
     onUpdated(toggleNav);
     return () => {
-      const tabs = context.slots.default?.();
-      console.log(tabs);
+      const tabs = context.slots.default?.()
       if (!tabs) return () => null;
       for (let i = 0; i < tabs.length; i++) {
         if (tabs[i].type !== Tab) {

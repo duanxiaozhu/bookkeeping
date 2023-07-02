@@ -1,6 +1,5 @@
-import { computed, defineComponent, PropType, reactive } from "vue";
+import { defineComponent, PropType } from "vue";
 import s from "./Bars.module.scss";
-import { Divider } from "vant";
 import { Money } from "../../shared/Money";
 import { Center } from "../../shared/Center";
 import { Icon } from "../../shared/Icon";

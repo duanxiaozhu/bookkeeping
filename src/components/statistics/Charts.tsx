@@ -16,7 +16,6 @@ import { Time } from "../../shared/time";
 import { Center } from "../../shared/Center";
 import { Icon } from "../../shared/Icon";
 import { useTypesStore } from "../../stores/useTypesStore";
-import { Value } from 'sass';
 
 const DAY = 24 * 3600 * 1000;
 
