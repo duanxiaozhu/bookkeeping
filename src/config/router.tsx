@@ -53,7 +53,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: "/items",
-    component:()=> ('../views/ItemPage'),
+    component:()=> import('../views/ItemPage'),
     children: [
       { path: "", component: ItemList },
       { path: "create", component: ItemCreate },
@@ -61,7 +61,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: "/tags",
-    component: ()=>('../views/TagPage'),
+    component: ()=>import('../views/TagPage'),
     children: [
       { path: "create", component: ()=> import('../components/tag/TagCreate') },
       { path: ":id/edit", component: ()=> import('../components/tag/TagEdit') },
